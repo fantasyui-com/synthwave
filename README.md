@@ -16,6 +16,17 @@ Simply include the file in your HTML document.
 
 ```
 
+Use synthwave-```a-z``` class in a html node, for example:
+
+```html
+
+<div class="synthwave-b">
+  <span class="badge badge-dark">Hello World</span>
+</div>
+
+
+```
+
 Add this to your HTML if you want to apply synthwave to HTML body.
 ```css
 
