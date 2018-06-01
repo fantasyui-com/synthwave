@@ -3,7 +3,7 @@ Simple and beautiful synthwave background collection.
 
 ## Demo
 
-[demo](https://rawgit.com/fantasyui-com/synthwave/master/README.md)
+[demo](https://rawgit.com/fantasyui-com/synthwave/master/index.html)
 
 ## Installation
 
