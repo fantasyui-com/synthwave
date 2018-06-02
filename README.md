@@ -4,7 +4,7 @@ Simple and beautiful synthwave background collection.
 ## Demo & Example
 
 - [demo preview of all styles](https://rawgit.com/fantasyui-com/synthwave/master/index.html)
-- [usage example with UI components](https://rawgit.com/fantasyui-com/synthwave/master/example.html)
+- [usage example with UI components](https://rawgit.com/fantasyui-com/synthwave/master/template.html)
 
 ## Installation
 
