@@ -1,6 +1,8 @@
 # synthwave
 Simple and beautiful synthwave background collection.
 
+![](icon.png)
+
 ## Demo & Example
 
 - [demo preview of all styles](https://rawgit.com/fantasyui-com/synthwave/master/demo.html)
