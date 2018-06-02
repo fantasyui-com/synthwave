@@ -6,46 +6,184 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!-- use this when placing waves on body -->
     <style>
-    html, body {height: 100%;}
-    body { background-attachment: fixed !important; }
-    .synthwave-demo {
-      height: 30em;
-      margin: 3em 0;
-      padding: 1em;
+      html, body {height: 100%;}
+    </style>
+
+    <!-- this is just to show the background better -->
+    <style>
+    #demo-body {
+      padding:  5em 7em;
+      background-attachment: fixed !important;
     }
     </style>
+
+    <script>
+    $(function(){
+
+      $('#full-screen').on('click', function(){
+
+        //var elem = $('#demo-body').get(0)
+        var elem = document.body
+
+        if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+                if (elem.requestFullScreen) {
+                    elem.requestFullScreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullScreen) {
+                    elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.cancelFullScreen) {
+                    document.cancelFullScreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+                });
+
+      $('#aziz-light').on('click', function(){
+        $('.primary.container')
+        .toggleClass('bg-dark')
+        .toggleClass('shadow-lg')
+      })
+
+      $('#next-wave').on('click', function(){
+        var thisWave = $('#demo-body').attr('class').split(' ').filter(function(c){if(c.match(/^synthwave-[a-z]$/)) return true; })[0];
+        var thisWaveLetter = thisWave.split('-')[1];
+        var thisWaveLetterNumber = thisWaveLetter.charCodeAt(0);
+        var newWaveLetterNumber = thisWaveLetterNumber+1;
+        if(newWaveLetterNumber > 122) newWaveLetterNumber = 97;
+        var newLetter = String.fromCharCode(newWaveLetterNumber);
+        var newClassName = 'synthwave-'+newLetter;
+
+        $('#demo-body').removeClass(thisWave).addClass(newClassName);
+        $('.synthwave-letter').text(newLetter)
+
+
+      })
+    })
+    </script>
+
     <link rel='stylesheet' href='style.css' />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   </head>
-  <body class="bg-dark">
-    <div class="container">
-      <div class="synthwave-demo container synthwave-a"><span class="badge badge-dark">.synthwave-a</span></div>
-      <div class="synthwave-demo container synthwave-b"><span class="badge badge-dark">.synthwave-b</span></div>
-      <div class="synthwave-demo container synthwave-c"><span class="badge badge-dark">.synthwave-c</span></div>
-      <div class="synthwave-demo container synthwave-d"><span class="badge badge-dark">.synthwave-d</span></div>
-      <div class="synthwave-demo container synthwave-e"><span class="badge badge-dark">.synthwave-e</span></div>
-      <div class="synthwave-demo container synthwave-f"><span class="badge badge-dark">.synthwave-f</span></div>
-      <div class="synthwave-demo container synthwave-g"><span class="badge badge-dark">.synthwave-g</span></div>
-      <div class="synthwave-demo container synthwave-h"><span class="badge badge-dark">.synthwave-h</span></div>
-      <div class="synthwave-demo container synthwave-i"><span class="badge badge-dark">.synthwave-i</span></div>
-      <div class="synthwave-demo container synthwave-j"><span class="badge badge-dark">.synthwave-j</span></div>
-      <div class="synthwave-demo container synthwave-k"><span class="badge badge-dark">.synthwave-k</span></div>
-      <div class="synthwave-demo container synthwave-l"><span class="badge badge-dark">.synthwave-l</span></div>
-      <div class="synthwave-demo container synthwave-m"><span class="badge badge-dark">.synthwave-m</span></div>
-      <div class="synthwave-demo container synthwave-n"><span class="badge badge-dark">.synthwave-n</span></div>
-      <div class="synthwave-demo container synthwave-o"><span class="badge badge-dark">.synthwave-o</span></div>
-      <div class="synthwave-demo container synthwave-p"><span class="badge badge-dark">.synthwave-p</span></div>
-      <div class="synthwave-demo container synthwave-q"><span class="badge badge-dark">.synthwave-q</span></div>
-      <div class="synthwave-demo container synthwave-r"><span class="badge badge-dark">.synthwave-r</span></div>
-      <div class="synthwave-demo container synthwave-s"><span class="badge badge-dark">.synthwave-s</span></div>
-      <div class="synthwave-demo container synthwave-t"><span class="badge badge-dark">.synthwave-t</span></div>
-      <div class="synthwave-demo container synthwave-u"><span class="badge badge-dark">.synthwave-u</span></div>
-      <div class="synthwave-demo container synthwave-v"><span class="badge badge-dark">.synthwave-v</span></div>
-      <div class="synthwave-demo container synthwave-w"><span class="badge badge-dark">.synthwave-w</span></div>
-      <div class="synthwave-demo container synthwave-x"><span class="badge badge-dark">.synthwave-x</span></div>
-      <div class="synthwave-demo container synthwave-y"><span class="badge badge-dark">.synthwave-y</span></div>
-      <div class="synthwave-demo container synthwave-z"><span class="badge badge-dark">.synthwave-z</span></div>
+
+  <!-- NOTE: synthwave-m class is applied directly to the body -->
+  <body>
+    <div id="demo-body" class="synthwave-a">
+    <!-- NOTE: use a container with a opaque background for content -->
+
+    <div class="primary container rounded bg-dark shadow-lg m-3 p-3">
+
+
+      <div class="row p-3">
+      <div class="col">
+
+        <div class="card border-info text-white bg-dark shadow">
+          <div class="card-header">Installation</div>
+          <div class="card-body p-1">
+
+               <div class="card-text text-secondary small"> add this to your <code>&lt;head&gt;</code> </div>
+              <code>
+                &lt;link rel='stylesheet' href='https://rawgit.com/fantasyui-com/synthwave/master/style.css' /&gt;
+              </code>
+
+
+
+              <div class="card-text text-secondary small"> use <code>class="synthwave-<span class="synthwave-letter">a</span>"</code> on block/div tags </div>
+              <code>&lt;div class="synthwave-<span class="synthwave-letter">a</span>"&gt;&lt;/div&gt;</code>
+
+          </div>
+        </div>
+
+        <!-- <div class="card border-info text-white bg-dark shadow">
+          <div class="card-header">Neuromancer</div>
+          <div class="card-body">
+            <p class="card-text">The sky above the port was the color of television, tuned to a dead channel.</p>
+          </div>
+          <div class="card-footer text-right">
+          </div>
+        </div>
+
+        <div class="card border-info text-white bg-dark shadow">
+          <div class="card-header">Snow Crash</div>
+          <div class="card-body">
+            <p class="card-text">Well, all information looks like noise until you break the code.</p>
+          </div>
+          <div class="card-footer text-right">
+          </div>
+        </div> -->
+
+       </div>
+       </div>
+
+      <div class="row p-3">
+        <div class="col-6">
+
+        <div class="card border-info text-white bg-dark shadow">
+          <div class="card-header">Command &amp; Control</div>
+          <div class="card-body">
+            <h5 class="card-title text-warning">synthwave-</h5>
+            <p  class="synthwave-letter card-text text-warning display-1 text-center bold">a</p>
+            <p class="card-text small">
+              name of class being previewed
+            </p>
+          </div>
+          <div class="card-footer text-right">
+            <p class="card-text text-secondary small"> use the button below to preview the next background </p>
+            <button id="full-screen" type="button" class="btn btn-dark shadow"><i class="fa fa-arrows-alt"></i></button>
+            <button id="aziz-light" type="button" class="btn btn-dark shadow"><i class="fa fa-lightbulb"></i></button>
+            <button id="next-wave" type="button" class="btn btn-info shadow">&raquo;</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-6">
+
+        <div class="card border-info text-white bg-dark shadow">
+          <div class="card-header">BODY</div>
+          <div class="card-body">
+
+            <div class="card-text">
+              <div class="card-text text-secondary small"> stretch and fix the body </div>
+              <code>
+                &lt;style&gt;<br>
+                  html, body {height: 100%;}<br>
+                  body { background-attachment: fixed !important; }<br>
+                &lt;/style&gt;
+              </code>
+            </div>
+
+            <div class="card-text">
+              <div class="card-text text-secondary small"> use this class name in your body tag </div>
+              <code>&lt;body class="synthwave-<span class="synthwave-letter">a</span>"&gt;&lt;/body&gt;</code>
+            </div>
+
+          </div>
+          <div class="card-footer text-right">
+            <p class="card-text text-secondary small"> Synthwave is released under GNU General Public License v3.0 </p>
+            <a href="https://github.com/fantasyui-com/synthwave" class="btn btn-primary shadow"><i class="fab fa-github"></i> Synthwave on GitHub</a>
+            <a href="https://npmjs.org/package/synthwave" class="btn btn-primary shadow"><i class="fab fa-npm"></i> Synthwave on npm</a>
+          </div>
+        </div>
+
+      </div>
+      </div>
+
+
+      </div>
+    </div>
+
     </div>
   </body>
 </html>

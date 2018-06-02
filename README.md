@@ -3,8 +3,8 @@ Simple and beautiful synthwave background collection.
 
 ## Demo & Example
 
-- [demo preview of all styles](https://rawgit.com/fantasyui-com/synthwave/master/index.html)
-- [usage example with UI components](https://rawgit.com/fantasyui-com/synthwave/master/template.html)
+- [demo preview of all styles](https://rawgit.com/fantasyui-com/synthwave/master/demo.html)
+- [usage example with UI components](https://rawgit.com/fantasyui-com/synthwave/master/index.html)
 
 ## Installation
 
