@@ -4,7 +4,8 @@
   "description": "Simple and beautiful synthwave background collection.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "make": "node make.js > style.css",
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
