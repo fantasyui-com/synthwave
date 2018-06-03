@@ -43,7 +43,7 @@ You can use the raw git CDN for a more permanent 3rd party hosting solution:
 
 ```html
 
- href='https://cdn.rawgit.com/fantasyui-com/synthwave/master/style.css' />
+<link rel='stylesheet' href='https://cdn.rawgit.com/fantasyui-com/synthwave/master/style.css' />
 
 ```
 
