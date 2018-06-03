@@ -3,6 +3,10 @@ Simple and beautiful synthwave background collection.
 
 ![](icon.png)
 
+## Why?
+
+  Because there is no time to mess with gradient editors.
+
 ## Demo & Example
 
 - [demo preview of all styles](https://rawgit.com/fantasyui-com/synthwave/master/demo.html)
@@ -61,7 +65,28 @@ grab the code from here https://github.com/fantasyui-com/synthwave/blob/master/s
 
 ```
 
-## Usage
+## API Usage
+
+```JavaScript
+
+const synthwave = require('synthwave');
+
+// Select x CSS
+synthwave.css('x')
+
+// Select a,b,c,d CSS
+synthwave.css(/[a-d]/)
+
+// Select raw a,b,c objects
+synthwave.raw(/[a-c]/)
+
+// Render raw
+let allRaw = synthwave.raw(/[cwmfjordbankglyphsvextquiz]/);
+let allCss = synthwave.render(allRaw) // -> CSS
+
+```
+
+## HTML Usage
 
 Use synthwave-```a-z``` class in a html node, for example:
 
