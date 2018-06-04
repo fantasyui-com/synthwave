@@ -10,6 +10,7 @@ const render = function (input){
 }
 
 module.exports = {
+
     render,
     css: function(pattern){
       const selected = database.gradients.filter(gradient => gradient.id.match(pattern));
@@ -19,4 +20,5 @@ module.exports = {
       const selected = database.gradients.filter(gradient => gradient.id.match(pattern));
       return selected;
     }
+    
 };

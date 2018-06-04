@@ -17,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/fantasyui-com/synthwave/issues"
   },
-  "homepage": "https://github.com/fantasyui-com/synthwave#readme"
+  "homepage": "https://github.com/fantasyui-com/synthwave#readme",
+  "dependencies": {
+    "posthtml-custom-elements": "^1.1.1",
+    "watch": "^1.0.2"
+  },
+  "devDependencies": {
+    "posthtml": "^0.11.3"
+  }
 }
