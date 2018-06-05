@@ -5,7 +5,7 @@
 
   <title>Synthwave Backgrounds</title>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -13,22 +13,89 @@
 
   <!-- use this when placing waves on body -->
   <style>
-    html, body { height: 100%; }
+    html,
+    body {
+      height: 100%;
+    }
   </style>
 
   <!-- this is just to show the background better -->
   <style>
     #demo-body {
-      height: 100%;
+      min-height: 100%;
       padding: 1em 7em;
       background-attachment: fixed !important;
     }
-
   </style>
 
   <script>
+    var database = {
+      meta: {},
+      data: []
+    };
 
     $(function() {
+
+      function renderDecl(database, letter) {
+        $('#demo-body').removeClass(letter.thisWave).addClass(letter.newClassName);
+        $('.synthwave-letter').text(letter.newLetter)
+
+        var color = function(color, data) {
+          let tag = "span";
+          return [ "<", tag, " ", "style=\"", "border-radius: 25%;", "display: inline-block;", "margin-bottom: 1.3rem;", "border-bottom", ": 8px solid", color, ";", "border-top", ": 8px solid", color, ";", "\">", data, "</"+ tag +">" ].join("");
+        }
+
+        var text = function(context, data, inline) {
+          let tag = inline?"div":"span";
+          return [ "<", tag, " ", "class=\"", "text" + "-" + context, "\">", data, "</"+ tag +">" ].join("");
+        }
+
+        var wrapClass = function(className, data) {
+          return [ text('warning',"."+className) , " ", text('warning',"{"), "<br>", " ", data, text('warning', "}") ].join("");
+        }
+
+        var backgroundFunct = function(type, angle, data) {
+          var chain = data.map( function(gradient) { return [ color(gradient.color, gradient.color), text('info',gradient.position) ].join(" ") } )
+          var code = [ text('primary',"background"), text('warning',":"), " ", text('info',type), " ", "(", " ", text('info',angle), ", ", " ",   chain.join(", "), " ", ")", text('warning',";")].join("");
+          return ["<div class=\"p-3\">",code,"</div>"].join("")
+        }
+
+        database.data.forEach(function(item) {
+          if (item.id === letter.newLetter) {
+            var bg = backgroundFunct(item.type, item.angle, item.gradient);
+            var css = wrapClass(database.meta.name+"-"+item.id, bg);
+            $('.css-code').html( css );
+          }
+        });
+
+      }
+      function getLetter(magic) {
+        var thisWave = $('#demo-body').attr('class').split(' ').filter(function(c) {
+          if (c.match(/^synthwave-[a-z]$/)) return true;
+        })[0];
+        var thisWaveLetter = thisWave.split('-')[1];
+        var thisWaveLetterNumber = thisWaveLetter.charCodeAt(0);
+        var newWaveLetterNumber = thisWaveLetterNumber + magic;
+        if (newWaveLetterNumber > 122) newWaveLetterNumber = 97;
+        if (newWaveLetterNumber < 97) newWaveLetterNumber = 122;
+        var newLetter = String.fromCharCode(newWaveLetterNumber);
+        var newClassName = 'synthwave-' + newLetter;
+
+        var response = {
+          thisWave: thisWave,
+          newClassName: newClassName,
+          newLetter: newLetter,
+        };
+        return response;
+      }
+
+      $.getJSON("./style.json", function(data) {
+        database = data;
+        var letter = getLetter(0);
+        renderDecl(database, letter);
+      });
+
+
 
       $('#full-screen').on('click', function() {
 
@@ -65,22 +132,17 @@
           .toggleClass('shadow-lg')
       })
 
+      $('#prev-wave').on('click', function() {
+        var letter = getLetter(-1);
+        renderDecl(database, letter);
+
+      });
+
       $('#next-wave').on('click', function() {
-        var thisWave = $('#demo-body').attr('class').split(' ').filter(function(c) {
-          if (c.match(/^synthwave-[a-z]$/)) return true;
-        })[0];
-        var thisWaveLetter = thisWave.split('-')[1];
-        var thisWaveLetterNumber = thisWaveLetter.charCodeAt(0);
-        var newWaveLetterNumber = thisWaveLetterNumber + 1;
-        if (newWaveLetterNumber > 122) newWaveLetterNumber = 97;
-        var newLetter = String.fromCharCode(newWaveLetterNumber);
-        var newClassName = 'synthwave-' + newLetter;
-
-        $('#demo-body').removeClass(thisWave).addClass(newClassName);
-        $('.synthwave-letter').text(newLetter)
-
-
+        var letter = getLetter(1);
+        renderDecl(database, letter);
       })
+
     })
   </script>
 
@@ -89,31 +151,30 @@
 
 </head>
 
-<!-- NOTE: synthwave-m class is applied directly to the body -->
 
 <body>
   <div id="demo-body" class="synthwave-a">
-    <!-- NOTE: use a container with a opaque background for content -->
 
 
 
-    <container class="primary rounded bg-dark shadow-lg p-3">
+    <container class="primary rounded p-3">
 
 
       <div class="row p-3">
 
-        <div class="col-3">
+        <div class="col-3" >
 
-          <div class="card border-warning text-white bg-dark shadow">
+          <div class="card border-warning text-white bg-dark shadow" style="min-height: 23rem;">
             <div class="card-header">Synthwave</div>
 
             <div class="card-body">
-              <div class=""> <img class="img-thumbnail bg-dark d-block" src="icon.png" style=""> </div>
+                <a href="demo.html"><img class="img-thumbnail bg-dark mb-3" src="icon.png"></a>
+                <div class="small text-secondary">Synthwave is released under <a href="https://choosealicense.com/licenses/gpl-3.0/" class=" text-info" >GNU General Public License v3.0</a> </div>
+
             </div>
             <div class="card-footer text-center">
-              <a href="https://github.com/fantasyui-com/synthwave" class="btn btn-primary shadow"><i class="fab fa-github"></i></a>
-              <a href="https://npmjs.org/package/synthwave" class="btn btn-primary shadow"><i class="fab fa-npm"></i></a>
-              <a href="demo.html" class="btn btn-secondary shadow"><i class="fa fa-eye"></i></a>
+              <a href="https://github.com/fantasyui-com/synthwave" class="btn btn-link text-white shadow"><i class="fab fa-2x fa-github"></i></a>
+              <a href="https://npmjs.org/package/synthwave" class="btn btn-link text-white shadow"><i class="fab fa-2x fa-npm"></i></a>
             </div>
           </div>
 
@@ -125,22 +186,29 @@
 
         <div class="col-9">
 
-          <div class="card border-warning text-white bg-dark shadow">
-            <div class="card-header">Command &amp; Control</div>
+          <div class="card border-danger text-white bg-dark shadow" style="min-height: 23rem;">
+            <div class="card-header text-right">
+
+              <a href="demo.html" title="View All" class="btn btn-link text-white shadow float-left"><i class="fa fa-eye"></i></a>
+
+              <button id="full-screen" title="Full Screen" type="button" class="btn btn-dark shadow"><i class="fa fa-arrows-alt"></i></button>
+              <button id="aziz-light" title="Background" type="button" class="btn btn-dark shadow"><i class="fa fa-lightbulb"></i></button>
+
+              <button id="prev-wave" title="Prev Wave" type="button" class="btn btn-primary shadow">&laquo;</button>
+              <button id="next-wave" title="Next Wave" type="button" class="btn btn-primary shadow">&raquo;</button>
+
+            </div>
             <div class="card-body">
 
-              <p class="card-text text-center">
-                <span class="text-warning display-1">synthwave-</span><span class="synthwave-letter text-warning display-1 bold">a</span>
-              </p>
+              <code class="css-code small"></code>
+              <div class="card-text text-secondary small"> Tip: you can copy and paste the code above; </div>
+
 
             </div>
-            <div class="card-footer text-right">
-              <small class="small text-secondary float-left">Synthwave is released under <a href="https://choosealicense.com/licenses/gpl-3.0/" class=" text-info" >GNU General Public License v3.0</a> </small>
 
-              <button id="full-screen" type="button" class="btn btn-dark shadow"><i class="fa fa-arrows-alt"></i></button>
-              <button id="aziz-light" type="button" class="btn btn-dark shadow"><i class="fa fa-lightbulb"></i></button>
-              <button id="next-wave" type="button" class="btn btn-info shadow">&raquo;</button>
-            </div>
+
+
+
           </div>
 
         </div>
@@ -151,14 +219,14 @@
 
 
 
-      <div class="row p-3">
+      <row class="p-3">
 
 
 
 
-        <div class="col-6">
+        <col-6>
 
-          <div class="card border-info text-white bg-dark shadow">
+          <div class="card border-info text-white bg-dark shadow" style="min-height: 14rem;">
             <div class="card-header">Installation</div>
 
             <div class="p-3">
@@ -192,12 +260,12 @@
                 </div>
               </div> -->
 
-        </div>
+        </col-6>
 
 
 
-        <div class="col-6">
-          <div class="card border-info text-white bg-dark shadow">
+        <col-6>
+          <div class="card border-info text-white bg-dark shadow" style="min-height: 14rem;">
             <div class="card-header">BODY</div>
             <div class="card-body">
               <div class="card-text">
@@ -213,31 +281,19 @@
               </div>
             </div>
           </div>
-        </div>
+        </col-6>
 
 
 
-      </div>
-
-      <!-- <div class="row p-3">
-        <div class="col-6">
-          <div class="card border-info text-white bg-dark shadow">
-            <div class="card-header">Installation</div>
-            <div class="p-3">
-              <div class="card-text text-info small"> add this to your <code>&lt;head&gt;</code> </div>
-              <code class="small"> &lt;link rel='stylesheet' href='https://rawgit.com/fantasyui-com/synthwave/master/style.css' /&gt; </code>
-              <br>
-              <br>
-              <div class="card-text text-info small"> use <code>class="synthwave-<span class="synthwave-letter">a</span>"</code> on block/div tags </div>
-              <code class="small">&lt;div class="synthwave-<span class="synthwave-letter">a</span>"&gt;&lt;/div&gt;</code>
-            </div>
-          </div>
-        </div>
-      </div> -->
+      </row>
 
 
 
-    </container> <!-- /container -->
+
+
+
+
+    </container>
   </div>
 
 

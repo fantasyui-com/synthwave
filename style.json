@@ -3,7 +3,7 @@
   "name": "synthwave"
 },
 
-"gradients": [
+"data": [
   {
     "id": "a",
     "type": "linear-gradient",

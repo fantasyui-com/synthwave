@@ -102,9 +102,19 @@ Use synthwave-```a-z``` class in a html node, for example:
 Add this to your HTML if you want to apply synthwave to HTML body.
 ```css
 
-html, body {height: 100%;}
+html, body { height: 100%;}
 body { background-attachment: fixed !important; }
 
 ```
 
 ![](screenshot.jpg)
+
+## Developer Notes
+
+git/.config remote origin holds to ease gh-pages publication
+
+    push = +refs/heads/master:refs/heads/gh-pages
+    push = +refs/heads/master:refs/heads/master
+
+
+index.src.html is compiled to index.html via PostHTML

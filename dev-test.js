@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const synthwave = require('./index.js');
 
 try{

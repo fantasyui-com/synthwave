@@ -13,12 +13,12 @@ module.exports = {
 
     render,
     css: function(pattern){
-      const selected = database.gradients.filter(gradient => gradient.id.match(pattern));
+      const selected = database.data.filter(gradient => gradient.id.match(pattern));
       return selected.map(i => render(i)).join("\n");
     },
     raw: function(pattern){
-      const selected = database.gradients.filter(gradient => gradient.id.match(pattern));
+      const selected = database.data.filter(gradient => gradient.id.match(pattern));
       return selected;
     }
-    
+
 };

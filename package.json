@@ -4,8 +4,9 @@
   "description": "Simple and beautiful synthwave background collection.",
   "main": "index.js",
   "scripts": {
-    "make": "node make.js > style.css",
-    "test": "node test.js"
+    "make": "node dev-make.js > style.css",
+    "watch": "node dev-watch.js",
+    "test": "node dev-test.js"
   },
   "repository": {
     "type": "git",
@@ -13,12 +14,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/fantasyui-com/synthwave/issues"
   },
   "homepage": "https://github.com/fantasyui-com/synthwave#readme",
   "dependencies": {
+    "chalk": "^2.4.1",
+    "color": "^3.0.0",
     "posthtml-custom-elements": "^1.1.1",
     "posthtml-minifier": "^0.1.0",
     "watch": "^1.0.2"
