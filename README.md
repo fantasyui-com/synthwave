@@ -118,3 +118,12 @@ git/.config remote origin holds to ease gh-pages publication
 
 
 index.src.html is compiled to index.html via PostHTML
+
+npm run watch
+parcel watch index.html.src.js --out-dir . --out-file index.html.js
+
+### Terminal Setup
+
+1. hs -c-1 .
+2. node dev-watch.js
+3. parcel watch index.html.src.js --out-dir . --out-file index.html.js

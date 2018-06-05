@@ -4,10 +4,8 @@
 <head>
 
   <title>Synthwave Backgrounds</title>
-
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
@@ -28,124 +26,7 @@
     }
   </style>
 
-  <script>
-    var database = {
-      meta: {},
-      data: []
-    };
-
-    $(function() {
-
-      function renderDecl(database, letter) {
-        $('#demo-body').removeClass(letter.thisWave).addClass(letter.newClassName);
-        $('.synthwave-letter').text(letter.newLetter)
-
-        var color = function(color, data) {
-          let tag = "span";
-          return [ "<", tag, " ", "style=\"", "border-radius: 25%;", "display: inline-block;", "margin-bottom: 1.3rem;", "border-bottom", ": 8px solid", color, ";", "border-top", ": 8px solid", color, ";", "\">", data, "</"+ tag +">" ].join("");
-        }
-
-        var text = function(context, data, inline) {
-          let tag = inline?"div":"span";
-          return [ "<", tag, " ", "class=\"", "text" + "-" + context, "\">", data, "</"+ tag +">" ].join("");
-        }
-
-        var wrapClass = function(className, data) {
-          return [ text('warning',"."+className) , " ", text('warning',"{"), "<br>", " ", data, text('warning', "}") ].join("");
-        }
-
-        var backgroundFunct = function(type, angle, data) {
-          var chain = data.map( function(gradient) { return [ color(gradient.color, gradient.color), text('info',gradient.position) ].join(" ") } )
-          var code = [ text('primary',"background"), text('warning',":"), " ", text('info',type), " ", "(", " ", text('info',angle), ", ", " ",   chain.join(", "), " ", ")", text('warning',";")].join("");
-          return ["<div class=\"p-3\">",code,"</div>"].join("")
-        }
-
-        database.data.forEach(function(item) {
-          if (item.id === letter.newLetter) {
-            var bg = backgroundFunct(item.type, item.angle, item.gradient);
-            var css = wrapClass(database.meta.name+"-"+item.id, bg);
-            $('.css-code').html( css );
-          }
-        });
-
-      }
-      function getLetter(magic) {
-        var thisWave = $('#demo-body').attr('class').split(' ').filter(function(c) {
-          if (c.match(/^synthwave-[a-z]$/)) return true;
-        })[0];
-        var thisWaveLetter = thisWave.split('-')[1];
-        var thisWaveLetterNumber = thisWaveLetter.charCodeAt(0);
-        var newWaveLetterNumber = thisWaveLetterNumber + magic;
-        if (newWaveLetterNumber > 122) newWaveLetterNumber = 97;
-        if (newWaveLetterNumber < 97) newWaveLetterNumber = 122;
-        var newLetter = String.fromCharCode(newWaveLetterNumber);
-        var newClassName = 'synthwave-' + newLetter;
-
-        var response = {
-          thisWave: thisWave,
-          newClassName: newClassName,
-          newLetter: newLetter,
-        };
-        return response;
-      }
-
-      $.getJSON("./style.json", function(data) {
-        database = data;
-        var letter = getLetter(0);
-        renderDecl(database, letter);
-      });
-
-
-
-      $('#full-screen').on('click', function() {
-
-        //var elem = $('#demo-body').get(0)
-        var elem = document.body
-
-        if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) ||
-          (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
-          if (elem.requestFullScreen) {
-            elem.requestFullScreen();
-          } else if (elem.mozRequestFullScreen) {
-            elem.mozRequestFullScreen();
-          } else if (elem.webkitRequestFullScreen) {
-            elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-          } else if (elem.msRequestFullscreen) {
-            elem.msRequestFullscreen();
-          }
-        } else {
-          if (document.cancelFullScreen) {
-            document.cancelFullScreen();
-          } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-          } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-          } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-          }
-        }
-      });
-
-      $('#aziz-light').on('click', function() {
-        $('.primary.container')
-          .toggleClass('bg-dark')
-          .toggleClass('shadow-lg')
-      })
-
-      $('#prev-wave').on('click', function() {
-        var letter = getLetter(-1);
-        renderDecl(database, letter);
-
-      });
-
-      $('#next-wave').on('click', function() {
-        var letter = getLetter(1);
-        renderDecl(database, letter);
-      })
-
-    })
-  </script>
-
+  <script src="index.html.js"></script>
   <link rel="stylesheet" href="style.css">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
@@ -153,82 +34,42 @@
 
 
 <body>
+
   <div id="demo-body" class="synthwave-a">
-
-
-
     <div class="container primary rounded p-3">
 
-
       <div class="row p-3">
-
         <div class="col-3">
-
-          <div class="card border-warning text-white bg-dark shadow" style="min-height: 23rem">
+          <div class="card border-warning text-white bg-danger shadow" style="min-height: 20rem">
             <div class="card-header">Synthwave</div>
-
             <div class="card-body">
-                <a href="demo.html"><img class="img-thumbnail bg-dark mb-3" src="icon.png"></a>
-                <div class="small text-secondary">Synthwave is released under <a href="https://choosealicense.com/licenses/gpl-3.0/" class="text-info">GNU General Public License v3.0</a> </div>
-
+              <a href="demo.html"><img class="img-thumbnail bg-dark mb-3" src="icon.png"></a>
             </div>
             <div class="card-footer text-center">
               <a href="https://github.com/fantasyui-com/synthwave" class="btn btn-link text-white shadow"><i class="fab fa-2x fa-github"></i></a>
               <a href="https://npmjs.org/package/synthwave" class="btn btn-link text-white shadow"><i class="fab fa-2x fa-npm"></i></a>
             </div>
           </div>
-
-
-
         </div>
-
-
-
         <div class="col-9">
-
-          <div class="card border-danger text-white bg-dark shadow" style="min-height: 23rem">
+          <div class="card border-danger text-white bg-dark shadow" style="min-height: 20rem">
             <div class="card-header text-right">
-
-              <a href="demo.html" title="View All" class="btn btn-link text-white shadow float-left"><i class="fa fa-eye"></i></a>
-
               <button id="full-screen" title="Full Screen" type="button" class="btn btn-dark shadow"><i class="fa fa-arrows-alt"></i></button>
-              <button id="aziz-light" title="Background" type="button" class="btn btn-dark shadow"><i class="fa fa-lightbulb"></i></button>
-
+              <button id="aziz-light" title="Shield Eyes" type="button" class="btn btn-dark shadow"><i class="fa fa-shield-alt"></i></button>
               <button id="prev-wave" title="Prev Wave" type="button" class="btn btn-primary shadow">&laquo;</button>
               <button id="next-wave" title="Next Wave" type="button" class="btn btn-primary shadow">&raquo;</button>
-
             </div>
             <div class="card-body">
-
-              <code class="css-code small"></code>
-              <div class="card-text text-secondary small"> Tip: you can copy and paste the code above; </div>
-
-
+              <code class="css-code small p-3 d-inline-block"></code>
             </div>
-
-
-
-
           </div>
-
         </div>
-
-
       </div>
 
-
-
-
       <div class="row p-3">
-
-
-
-
         <div class="col-6">
-
-          <div class="card border-info text-white bg-dark shadow" style="min-height: 14rem">
+          <div class="card border-info text-white bg-dark shadow" style="min-height: 16rem">
             <div class="card-header">Installation</div>
-
             <div class="p-3">
               <div class="card-text text-info small"> add this to your <code>&lt;head&gt;</code> </div>
               <code class="small">
@@ -239,33 +80,10 @@
               <div class="card-text text-info small"> use <code>class="synthwave-<span class="synthwave-letter">a</span>"</code> on block/div tags </div>
               <code class="small">&lt;div class="synthwave-<span class="synthwave-letter">a</span>"&gt;&lt;/div&gt;</code>
             </div>
-
           </div>
-
-          <!-- <div class="card border-info text-white bg-dark shadow">
-                <div class="card-header">Neuromancer</div>
-                <div class="card-body">
-                  <p class="card-text">The sky above the port was the color of television, tuned to a dead channel.</p>
-                </div>
-                <div class="card-footer text-right">
-                </div>
-              </div>
-
-              <div class="card border-info text-white bg-dark shadow">
-                <div class="card-header">Snow Crash</div>
-                <div class="card-body">
-                  <p class="card-text">Well, all information looks like noise until you break the code.</p>
-                </div>
-                <div class="card-footer text-right">
-                </div>
-              </div> -->
-
         </div>
-
-
-
         <div class="col-6">
-          <div class="card border-info text-white bg-dark shadow" style="min-height: 14rem">
+          <div class="card border-info text-white bg-dark shadow" style="min-height: 16rem">
             <div class="card-header">BODY</div>
             <div class="card-body">
               <div class="card-text">
@@ -282,23 +100,59 @@
             </div>
           </div>
         </div>
-
-
-
       </div>
 
+      <div class="row p-3">
+        <div class="col-3">
+          <div class="card bg-warning shadow" style="min-height: 15rem">
+            <div class="card-header">Neuromancer</div>
+            <div class="card-body">
+              <p class="card-text">The sky above the port was the color of television, tuned to a dead channel.</p>
+            </div>
+            <div class="card-footer text-right">
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card bg-info shadow" style="min-height: 15rem">
+            <div class="card-header">Snow Crash</div>
+            <div class="card-body">
+              <p class="card-text">Well, all information looks like noise until you break the code.</p>
+            </div>
+            <div class="card-footer text-right">
+            </div>
+          </div>
+        </div>
 
-
-
-
-
+        <div class="col-3">
+          <div class="card border-info text-white bg-dark shadow" style="min-height: 15rem">
+            <div class="card-header text-secondary">License</div>
+            <div class="card-body">
+              <p class="card-text text-center">
+                </p><div class="small text-secondary">Synthwave is released under <a href="https://choosealicense.com/licenses/gpl-3.0/" class="text-info">GNU General Public License v3.0</a> </div>
+              <p></p>
+            </div>
+            <div class="card-footer text-right">
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card border-info text-white bg-dark shadow" style="min-height: 15rem">
+            <div class="card-header text-secondary">Overview</div>
+            <div class="card-body">
+              <p class="card-text">
+                </p><div class="small text-secondary">Take a look at the single page <a href="demo.html" class="text-info">overview.</a></div>
+              <p></p>
+            </div>
+            <div class="card-footer text-right">
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
 
-
-
-  
 </body>
 
 </html>
