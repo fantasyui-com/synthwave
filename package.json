@@ -20,6 +20,7 @@
   "homepage": "https://github.com/fantasyui-com/synthwave#readme",
   "dependencies": {
     "chalk": "^2.4.1",
+    "clean-css": "^4.2.1",
     "color": "^3.0.0",
     "posthtml-custom-elements": "^1.1.1",
     "posthtml-minifier": "^0.1.0",
@@ -27,6 +28,6 @@
     "watch": "^1.0.2"
   },
   "devDependencies": {
-    "posthtml": "^0.11.3"
+    "posthtml": "^0.11.4"
   }
 }
