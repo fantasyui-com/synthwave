@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "make": "node dev-make.js > style.css",
-    "test": "node dev-test.js"
+    "test": "node dev-test.js",
+    "save": "git add .; git commit -m 'New Release'; git push; npm version patch; npm publish; git push;"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fantasyui-com/synthwave.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "fantasyui.com <fantasyui.com@gmail.com>",
   "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/fantasyui-com/synthwave/issues"
@@ -25,7 +26,7 @@
     "posthtml-custom-elements": "^1.1.1",
     "posthtml-minifier": "^0.1.0",
     "screenfull": "^3.3.2",
-    "watch": "^1.0.2"
+    "watch": "^0.13.0"
   },
   "devDependencies": {
     "posthtml": "^0.11.6"
