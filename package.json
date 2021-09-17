@@ -1,6 +1,6 @@
 {
   "name": "synthwave",
-  "version": "4.18.0",
+  "version": "4.19.0",
   "description": "Simple and beautiful synthwave background collection.",
   "main": "index.js",
   "scripts": {
